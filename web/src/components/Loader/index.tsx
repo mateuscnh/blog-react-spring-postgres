@@ -3,8 +3,12 @@ import { Spin } from "antd";
 import styled from "styled-components";
 
 const Container = styled.div`
-  padding: 48px 0;
-  text-align: center;
+  display: inline-block;
+
+  position: absolute;
+  top: 40%;
+  right: 50%;
+  transform: translate(-50%, -50%);
 `;
 
 const Loader: React.FC = () => {

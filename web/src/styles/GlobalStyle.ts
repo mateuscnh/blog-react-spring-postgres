@@ -16,7 +16,7 @@ export default createGlobalStyle`
 
     .container{
       height: 100%;
-      padding: 0 2%;
+      padding: auto 2%;
       margin: 0 auto;
       max-width: 860px;
     }
