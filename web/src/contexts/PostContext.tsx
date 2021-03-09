@@ -25,7 +25,11 @@ const PostProvider: React.FC<PostProviderProps> = ({ children }) => {
   const [posts, setPosts] = useState(data);
 
   useEffect(() => {
-    if (data) setPosts(data);
+    const timer = setTimeout(() => {
+      setPosts(data);
+    }, 1 * 1000);
+
+    return () => clearTimeout(timer);
   }, [data]);
 
   return (

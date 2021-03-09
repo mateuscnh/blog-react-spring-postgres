@@ -28,7 +28,7 @@ export const ContentOne = styled.div`
     transition: 0.4s;
 
     :hover {
-      object-position: 40%;
+      object-position: 20%;
     }
   }
 `;
