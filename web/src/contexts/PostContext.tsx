@@ -1,16 +1,17 @@
-import React, { createContext, ReactNode, useState } from "react";
+import React, { createContext, ReactNode, useEffect, useState } from "react";
 import { useFetch } from "../hooks/useFetch";
 
-interface PostProps {
-  id: Number;
-  title: String;
-  data: Date;
-  author: String;
-  text: String;
+export interface PostProps {
+  id: number;
+  title: string;
+  img_url: string;
+  date: Date;
+  author: string;
+  text: string;
 }
 
 interface PostContextProps {
-  posts: PostProps;
+  posts: PostProps[];
 }
 
 export const PostContext = createContext({} as PostContextProps);
@@ -22,6 +23,10 @@ interface PostProviderProps {
 const PostProvider: React.FC<PostProviderProps> = ({ children }) => {
   const { data } = useFetch("/posts");
   const [posts, setPosts] = useState(data);
+
+  useEffect(() => {
+    if (data) setPosts(data);
+  }, [data]);
 
   return (
     <PostContext.Provider value={{ posts }}>{children}</PostContext.Provider>
