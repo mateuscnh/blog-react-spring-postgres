@@ -23,12 +23,12 @@ export const ContentOne = styled.div`
     height: 220px;
     object-fit: cover;
     object-position: left;
-    border-radius: 40px;
+    border-radius: 40px 40px 8px 40px;
 
-    transition: 0.4s;
+    transition: 0.2s;
 
     :hover {
-      object-position: 20%;
+      object-position: bottom;
     }
   }
 `;

@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.header`
   position: fixed;
+  z-index: 20;
   height: 56px;
   width: 100%;
   background: rgba(255, 255, 255, 0.9);
@@ -19,5 +20,9 @@ export const Content = styled.div`
     margin: 0;
     font-weight: 600;
     color: #1890ff;
+  }
+
+  button {
+    border-radius: 4px;
   }
 `;

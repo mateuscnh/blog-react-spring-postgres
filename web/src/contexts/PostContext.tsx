@@ -1,4 +1,11 @@
-import React, { createContext, ReactNode, useEffect, useState } from "react";
+import React, {
+  createContext,
+  ReactNode,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
+import { Mutator } from "swr/dist/types";
 import { useFetch } from "../hooks/useFetch";
 
 export interface PostProps {
@@ -12,6 +19,9 @@ export interface PostProps {
 
 interface PostContextProps {
   posts: PostProps[];
+  isNewPostModalVisible: boolean;
+  toggleNewPostModal: () => void;
+  mutate: Mutator;
 }
 
 export const PostContext = createContext({} as PostContextProps);
@@ -21,8 +31,9 @@ interface PostProviderProps {
 }
 
 const PostProvider: React.FC<PostProviderProps> = ({ children }) => {
-  const { data } = useFetch("/posts");
+  const { data, mutate } = useFetch("/posts");
   const [posts, setPosts] = useState(data);
+  const [isNewPostModalVisible, setIsNewPostModalVisible] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -32,8 +43,21 @@ const PostProvider: React.FC<PostProviderProps> = ({ children }) => {
     return () => clearTimeout(timer);
   }, [data]);
 
+  const toggleNewPostModal = useCallback(() => {
+    setIsNewPostModalVisible(!isNewPostModalVisible);
+  }, [isNewPostModalVisible]);
+
   return (
-    <PostContext.Provider value={{ posts }}>{children}</PostContext.Provider>
+    <PostContext.Provider
+      value={{
+        posts,
+        mutate,
+        isNewPostModalVisible,
+        toggleNewPostModal,
+      }}
+    >
+      {children}
+    </PostContext.Provider>
   );
 };
 
