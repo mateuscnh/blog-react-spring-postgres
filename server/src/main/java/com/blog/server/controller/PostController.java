@@ -57,7 +57,7 @@ public class PostController {
          }).orElse(ResponseEntity.notFound().build());
     }  
 
-    @DeleteMapping
+    @DeleteMapping(value="/posts/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         return postRepository.findById(id).map(record -> {
             postRepository.deleteById(id);
